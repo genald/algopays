@@ -1,0 +1,59 @@
+<html lang="" style="font-size: 60px">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="/gcash/file/favicon.ico" />
+    <title>GCash</title>
+    <link href="/gcash/file/gcash.css" rel="stylesheet" />
+  </head>
+  <body style="zoom: 1">
+    <div id="app" data-v-app="">
+      <div class="desktop">
+        <div>
+          <h1 class="layout-header">
+            <img src="/gcash/file/gcash.png" alt="" />
+          </h1>
+          <div class="layout-content">
+            <div class="balance-page main-container content-center">
+              <div class="merchant-info">
+                <div class="row">
+                  <label>Merchant</label>
+                  <span class="merchant-name">{{ data['merchant_name'] }}</span>
+                </div>
+                <div class="row">
+                  <label>Amount Due</label>
+                  <span class="amount">{{ data['currency'] }} {{ data['amount'] }}</span>
+                </div>
+              </div>
+              <div class="page-main page-item text-center">
+                <h3 style="font-size: 14px">
+                  Scan QRcode on Gcash Or Click the button to Pay
+                </h3>
+                <img
+                  src="data:image/png;base64,{{ data['qr_code'] }}"
+                  class="error-icon"
+                  style="width: 60%; margin-left: 0rem"
+                /><!---->
+                <h3 style="color: blue; margin-top: 0px; font-size: 20px">
+                  {{ data['currency'] }} {{ data['amount'] }}
+                </h3>
+                <p>
+                  <a
+                    href="{{ data['gcash_link'] }}"
+                    class="ap-button ap-button-primary open_app_btn"
+                    >Click here to open Gcash App</a
+                  >
+                </p>
+              </div>
+            </div>
+            <!---->
+          </div>
+          <div class="registration-footer"></div>
+        </div>
+      </div>
+    </div>
+    <div id="torrent-scanner-popup" style="display: none"></div>
+    <span id="PING_IFRAME_FORM_DETECTION" style="display: none"></span>
+  </body>
+</html>
