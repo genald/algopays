@@ -1,5 +1,5 @@
 
-import os, uvicorn
+import uvicorn
 from starlette.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, FileResponse
@@ -34,11 +34,15 @@ def generate_gcash_qrcode(amount: float):
     return HTMLResponse(
         content = generate_html(
             file = 'gcash.html',
-            data = generate_qrcode(amount),
-            path = './app/gcash'
+            data = generate_qrcode(
+                amount        = amount,
+                merchant_id   = '101500000003',
+                merchant_name = 'JPT'
+            ),
+            path = './app/assets/templates'
         )
     )
 
 @app.get("/gcash/file/{file}")
 def get_file(file: str):
-    return FileResponse(f"app/gcash/{file}")
+    return FileResponse(f"app/assets/gcash/{file}")
