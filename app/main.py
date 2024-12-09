@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, FileResponse
 from gcash import generate_qrcode
 from utils import generate_html
+from typing import Optional
 
 app = FastAPI()
 
@@ -30,14 +31,14 @@ if __name__ == '__main__':
     uvicorn.run(**params)
 
 @app.get("/gcash")
-def generate_gcash_qrcode(amount: float):
+def generate_gcash_qrcode(amount: float, merchant_name: Optional[str] = "Puedeng Baguhin"):
     return HTMLResponse(
         content = generate_html(
             file = 'gcash.html',
             data = generate_qrcode(
                 amount        = amount,
                 merchant_id   = '101500000003',
-                merchant_name = 'JPT'
+                merchant_name = merchant_name
             ),
             path = './app/assets/templates'
         )
