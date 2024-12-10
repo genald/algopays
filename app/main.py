@@ -1,14 +1,25 @@
 
 import uvicorn
+from contextlib import asynccontextmanager
 from starlette.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, FileResponse
 from gcash import generate_qrcode
 from utils import generate_html
 from typing import Optional
+from database import get_engine
+from sqlmodel import SQLModel
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    SQLModel.metadata.create_all(get_engine())
+    
+    yield
+    # On Close
+    # -- Insert code here --
 
+app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins       = ["*"],

@@ -11,6 +11,11 @@ pyzbar = "*"
 pillow = "*"
 jinja2 = "*"
 pycryptodome = "*"
+sqlalchemy = "==2.0.36"
+sqlmodel = "==0.0.22"
+pydantic-settings = "*"
+pydantic = "==v2.10.3"
+mysql-connector-python = "*"
 
 [dev-packages]
 ipykernel = "*"
